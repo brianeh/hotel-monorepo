@@ -1,0 +1,36 @@
+# Netbeans
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# DevContainer auto-generated files
+build.properties
+**/build.properties
+
+# Compiled files
+*.class
+
+# IDE
+.vscode/settings.json.user
+.vscode/launch.json.user
+.vscode/tasks.json.user
+.vscode/.ropeproject
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*~

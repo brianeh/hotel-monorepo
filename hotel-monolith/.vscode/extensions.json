@@ -1,0 +1,20 @@
+{
+    "recommendations": [
+        "vscjava.vscode-java-pack",
+        "vscjava.vscode-maven",
+        "vscjava.vscode-java-debug",
+        "vscjava.vscode-java-test",
+        "redhat.vscode-xml",
+        "ms-vscode.vscode-json",
+        "bradlc.vscode-tailwindcss",
+        "formulahendry.auto-rename-tag",
+        "ms-vscode.vscode-css-peek",
+        "ms-vscode.vscode-html-css-support",
+        "ms-vscode.vscode-javascript-booster",
+        "ms-vscode.vscode-typescript-next",
+        "cweijan.vscode-mysql-client2",
+        "ms-vscode.vscode-sqlite",
+        "ms-vscode.vscode-js-debug",
+        "pthorsson.vscode-jsp"
+    ]
+}

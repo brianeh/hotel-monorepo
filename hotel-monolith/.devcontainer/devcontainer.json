@@ -1,0 +1,56 @@
+{
+	"name": "HotelReservation Java EE DevContainer",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"features": {},
+	"remoteUser": "vscode",
+	"settings": {
+		"java.home": "/usr/lib/jvm/java-8-openjdk-arm64"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"vscjava.vscode-java-pack",
+				"vscjava.vscode-maven",
+				"vscjava.vscode-java-debug",
+				"vscjava.vscode-java-test",
+				"redhat.vscode-xml",
+				"ms-vscode.vscode-json",
+				"bradlc.vscode-tailwindcss",
+				"formulahendry.auto-rename-tag",
+				"ms-vscode.vscode-css-peek",
+				"ms-vscode.vscode-html-css-support",
+				"ms-vscode.vscode-javascript-booster",
+				"cweijan.vscode-mysql-client2",
+				"ms-vscode.vscode-js-debug",
+				"pthorsson.vscode-jsp"
+			]
+		}
+	},
+	"forwardPorts": [
+		8080,
+		3306,
+		4848
+	],
+	"portsAttributes": {
+		"8080": {
+			"label": "GlassFish Application",
+			"onAutoForward": "notify"
+		},
+		"3306": {
+			"label": "MySQL Database",
+			"onAutoForward": "silent"
+		},
+		"4848": {
+			"label": "GlassFish Admin Console",
+			"onAutoForward": "notify"
+		}
+	},
+	"postCreateCommand": "bash /workspaces/hotel-monolith/.devcontainer/setup.sh",
+	"remoteEnv": {
+		"JAVA_HOME": "/usr/lib/jvm/java-8-openjdk-arm64",
+		"GLASSFISH_HOME": "/opt/glassfish4",
+		"ANT_HOME": "/opt/apache-ant-1.10.7"
+	}
+}

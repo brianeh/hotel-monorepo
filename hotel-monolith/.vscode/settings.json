@@ -1,0 +1,81 @@
+{
+    "java.home": "/usr/lib/jvm/java-8-openjdk-arm64",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-1.8",
+            "path": "/usr/lib/jvm/java-8-openjdk-arm64"
+        }
+    ],
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.import.gradle.enabled": false,
+    "java.import.maven.enabled": false,
+    "java.import.ant.enabled": true,
+    "java.project.sourcePaths": [
+        "HotelReservation-ejb/src/java",
+        "HotelReservation-war/src/java"
+    ],
+    "java.project.outputPath": "build/classes",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/opt/glassfish4/glassfish/modules/javax.persistence.jar",
+        "/opt/glassfish4/glassfish/modules/ejb-api.jar",
+        "/opt/glassfish4/glassfish/modules/javax.ejb-api.jar",
+        "/opt/glassfish4/glassfish/modules/javax.servlet-api.jar",
+        "/opt/glassfish4/glassfish/modules/javax.servlet.jsp-api.jar",
+        "/opt/glassfish4/glassfish/modules/javax.servlet.jsp.jstl-api.jar",
+        "/opt/glassfish4/glassfish/modules/javax.validation-api.jar",
+        "/opt/glassfish4/glassfish/modules/bean-validator.jar",
+        "/opt/glassfish4/glassfish/modules/endorsed/jaxb-api.jar",
+        "/opt/glassfish4/glassfish/modules/javax.xml.ws-api.jar",
+        "/opt/glassfish4/glassfish/modules/javax.jws-api.jar",
+        "/opt/glassfish4/glassfish/lib/mysql-connector-java-8.0.16.jar"
+    ],
+    "files.exclude": {
+        "**/build/**": true,
+        "**/dist/**": true,
+        "**/nbproject/private/**": true,
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings/**": true
+    },
+    "files.watcherExclude": {
+        "**/build/**": true,
+        "**/dist/**": true
+    },
+    "java.format.settings.url": "",
+    "java.format.settings.profile": "",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "java.completion.importOrder": [
+        "java",
+        "javax",
+        "org",
+        "com"
+    ],
+    "java.sources.organizeImports.starThreshold": 99,
+    "java.sources.organizeImports.staticStarThreshold": 99,
+    "xml.validation.enabled": true,
+    "xml.validation.namespaces.enabled": "onDemand",
+    "html.format.indentInnerHtml": true,
+    "css.validate": true,
+    "javascript.validate.enable": true,
+    "files.associations": {
+        "*.jsp": "jsp",
+        "*.jspf": "jsp"
+    },
+    "emmet.includeLanguages": {
+        "jsp": "html"
+    },
+    "emmet.triggerExpansionOnTab": true,
+    "jsp.syntax.highlighting": true,
+    "jsp.format.enable": true,
+    "jsp.completion.enabled": true,
+    "jsp.validation.enabled": true,
+    "html.suggest.html5": true,
+    "html.format.wrapLineLength": 120,
+    "html.format.indentInnerHtml": true,
+    "html.format.preserveNewLines": true
+}
