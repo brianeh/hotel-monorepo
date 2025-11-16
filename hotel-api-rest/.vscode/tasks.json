@@ -1,0 +1,176 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build (Full Project)",
+            "type": "shell",
+            "command": "./build.sh",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Build the entire HotelReservation project using the build script"
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "./build.sh",
+            "args": [
+                "clean"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Clean all build artifacts using the build script"
+        },
+        {
+            "label": "Build EJB Module",
+            "type": "shell",
+            "command": "ant",
+            "args": [
+                "-f",
+                "HotelReservation-ejb/build.xml"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Build only the EJB module"
+        },
+        {
+            "label": "Build WAR Module",
+            "type": "shell",
+            "command": "ant",
+            "args": [
+                "-f",
+                "HotelReservation-war/build.xml"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Build only the WAR module"
+        },
+        {
+            "label": "Create Distribution",
+            "type": "shell",
+            "command": "./build.sh",
+            "args": [
+                "dist"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Create distribution archives using the build script"
+        },
+        {
+            "label": "Deploy to GlassFish",
+            "type": "shell",
+            "command": "./deploy.sh",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Build and deploy application to GlassFish"
+        },
+        {
+            "label": "Check Services Status",
+            "type": "shell",
+            "command": "./status.sh",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Check status of all services (MySQL, GlassFish, etc.)"
+        },
+        {
+            "label": "Clean EJB Module",
+            "type": "shell",
+            "command": "./build.sh",
+            "args": [
+                "-f",
+                "HotelReservation-ejb/build.xml",
+                "clean"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Clean EJB module build artifacts using the build script"
+        },
+        {
+            "label": "Clean WAR Module",
+            "type": "shell",
+            "command": "./build.sh",
+            "args": [
+                "-f",
+                "HotelReservation-war/build.xml",
+                "clean"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Clean WAR module build artifacts using the build script"
+        }
+    ]
+}

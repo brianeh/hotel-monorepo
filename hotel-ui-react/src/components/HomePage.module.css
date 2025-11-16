@@ -1,0 +1,194 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  background: linear-gradient(
+      135deg,
+      rgba(56, 128, 184, 0.7),
+      rgba(118, 75, 162, 0.8)
+    ),
+    url("/images/banner-slider-1.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.overlay {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6));
+  display: flex;
+  flex-direction: column;
+}
+
+/* header/search styles are now in layout/SearchForm modules */
+
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem 6rem;
+}
+
+.heroContent {
+  max-width: 720px;
+  width: 100%;
+  text-align: center;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 3rem 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.45);
+  box-sizing: border-box;
+}
+
+.heroTitle {
+  font-size: 2.75rem;
+  margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+  font-size: 1.15rem;
+  margin-bottom: 2rem;
+  color: #e0f2fe;
+}
+
+.dateForm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2.25rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formGroup {
+  text-align: left;
+  min-width: 0; /* Prevent grid overflow */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.label {
+  display: block;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+  color: #bfdbfe;
+}
+
+.dateInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  padding-right: 2.75rem; /* Make space for calendar icon */
+  border-radius: 10px;
+  border: 2px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.85);
+  color: #f8fafc;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.dateInput:hover {
+  border-color: rgba(56, 180, 142, 0.7);
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 0 0 3px rgba(56, 180, 142, 0.1);
+}
+
+.dateInput:focus {
+  outline: none;
+  border-color: #38b48e;
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 0 0 3px rgba(56, 180, 142, 0.2);
+}
+
+.dateInput:active {
+  border-color: #51d3ad;
+  box-shadow: 0 0 0 3px rgba(56, 180, 142, 0.3);
+}
+
+/* Style the native calendar picker icon for better visibility */
+.dateInput::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.8;
+  filter: invert(1);
+  width: 20px;
+  height: 20px;
+  margin-left: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.dateInput:hover::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  filter: invert(0.7) sepia(1) saturate(3) hue-rotate(120deg);
+  transform: scale(1.1);
+}
+
+.dateInput:focus::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  filter: invert(0.6) sepia(1) saturate(4) hue-rotate(115deg);
+  transform: scale(1.15);
+}
+
+.checkButton {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  border: none;
+  background: #38b48e;
+  color: #0f172a;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.checkButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(56, 180, 142, 0.35);
+}
+
+.ctaLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #38b48e;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.ctaLink:hover,
+.ctaLink:focus {
+  color: #51d3ad;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 1rem 4rem;
+  }
+
+  .heroContent {
+    padding: 2rem 1.5rem;
+  }
+
+  .dateForm {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .formGroup {
+    width: 100%;
+  }
+
+  .dateInput:hover,
+  .dateInput:focus {
+    box-shadow: 0 0 0 2px rgba(56, 180, 142, 0.2);
+  }
+}

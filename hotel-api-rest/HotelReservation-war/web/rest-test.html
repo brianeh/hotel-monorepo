@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>REST API Test Page - Hotel Reservation System</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                padding: 20px;
+                color: #333;
+            }
+
+            .container {
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+
+            header {
+                background: white;
+                padding: 30px;
+                border-radius: 10px 10px 0 0;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+
+            h1 {
+                color: #667eea;
+                font-size: 2.5em;
+                margin-bottom: 10px;
+            }
+
+            .subtitle {
+                color: #666;
+                font-size: 1.1em;
+            }
+
+            .section {
+                background: white;
+                padding: 25px;
+                margin-bottom: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .section h2 {
+                color: #667eea;
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #f0f0f0;
+            }
+
+            .controls {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                margin-bottom: 15px;
+            }
+
+            input,
+            button {
+                padding: 12px 20px;
+                font-size: 14px;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+            }
+
+            input {
+                flex: 1;
+                min-width: 150px;
+            }
+
+            input:focus {
+                outline: none;
+                border-color: #667eea;
+                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            }
+
+            button {
+                background: #667eea;
+                color: white;
+                border: none;
+                cursor: pointer;
+                font-weight: 600;
+                transition: all 0.3s;
+            }
+
+            button:hover {
+                background: #5568d3;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            }
+
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+                transform: none;
+            }
+
+            .response {
+                background: #f8f9fa;
+                padding: 15px;
+                border-radius: 5px;
+                margin-top: 15px;
+                font-family: 'Courier New', monospace;
+                font-size: 13px;
+                max-height: 400px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+                border: 1px solid #e0e0e0;
+            }
+
+            .room-card {
+                background: #fff;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                padding: 20px;
+                margin: 15px 0;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+
+            .room-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .room-card h3 {
+                color: #28a745;
+                margin: 0 0 15px 0;
+                font-size: 1.3em;
+            }
+
+            .room-card p {
+                margin: 8px 0;
+                color: #555;
+            }
+
+            .price-tag {
+                display: inline-block;
+                background: #28a745;
+                color: white;
+                padding: 5px 15px;
+                border-radius: 20px;
+                font-weight: bold;
+                margin: 10px 0;
+            }
+
+            .status {
+                padding: 8px 15px;
+                border-radius: 5px;
+                margin-top: 10px;
+                font-weight: 600;
+            }
+
+            .status.success {
+                background: #d4edda;
+                color: #155724;
+                border: 1px solid #c3e6cb;
+            }
+
+            .status.error {
+                background: #f8d7da;
+                color: #721c24;
+                border: 1px solid #f5c6cb;
+            }
+
+            .status.loading {
+                background: #d1ecf1;
+                color: #0c5460;
+                border: 1px solid #bee5eb;
+            }
+
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 15px;
+                margin-top: 20px;
+            }
+
+            .room-info {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .icon {
+                font-size: 1.2em;
+            }
+
+            .badge {
+                display: inline-block;
+                padding: 3px 10px;
+                border-radius: 12px;
+                font-size: 0.85em;
+                font-weight: 600;
+                margin-left: 8px;
+            }
+
+            .badge.green {
+                background: #d4edda;
+                color: #155724;
+            }
+
+            .badge.blue {
+                background: #d1ecf1;
+                color: #0c5460;
+            }
+
+            .loading-spinner {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                border: 3px solid #f3f3f3;
+                border-top: 3px solid #667eea;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                margin-right: 8px;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .empty-state {
+                text-align: center;
+                padding: 40px;
+                color: #999;
+            }
+
+            @media (max-width: 768px) {
+                .controls {
+                    flex-direction: column;
+                }
+
+                input,
+                button {
+                    width: 100%;
+                }
+
+                h1 {
+                    font-size: 2em;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <header>
+                <h1>🏨 Hotel Reservation REST API Test</h1>
+                <p class="subtitle">Interactive testing interface for the Hotel Reservation System REST API</p>
+            </header>
+
+            <!-- Section 1: Get All Rooms -->
+            <div class="section">
+                <h2>1. Get All Rooms</h2>
+                <p>Fetch all available rooms from the hotel</p>
+                <button onclick="getAllRooms()" id="btn-all-rooms">📋 Get All Rooms</button>
+                <div id="rooms-status"></div>
+                <div id="rooms-response"></div>
+            </div>
+
+            <!-- Section 2: Get Room by ID -->
+            <div class="section">
+                <h2>2. Get Room by ID</h2>
+                <p>Fetch details of a specific room</p>
+                <div class="controls">
+                    <input type="number" id="room-id" placeholder="Enter Room ID" value="1" min="1">
+                    <button onclick="getRoomById()">🔍 Get Room</button>
+                </div>
+                <div id="room-status"></div>
+                <div id="room-response" class="response"></div>
+            </div>
+
+            <!-- Section 3: Search Available Rooms -->
+            <div class="section">
+                <h2>3. Search Available Rooms</h2>
+                <p>Find available rooms for specific dates</p>
+                <div class="controls">
+                    <input type="date" id="checkin-date" value="2025-01-15">
+                    <input type="date" id="checkout-date" value="2025-01-20">
+                    <button onclick="searchAvailableRooms()">🔎 Search Available Rooms</button>
+                </div>
+                <div id="search-status"></div>
+                <div id="search-response"></div>
+            </div>
+
+            <!-- Section 4: Create Reservation -->
+            <div class="section">
+                <h2>4. Create Reservation</h2>
+                <p>Create a new hotel reservation</p>
+                <div class="controls">
+                    <input type="number" id="res-room-id" placeholder="Room ID" value="1" min="1">
+                    <input type="date" id="res-checkin" value="2025-02-15">
+                    <input type="date" id="res-checkout" value="2025-02-18">
+                </div>
+                <div class="controls">
+                    <input type="text" id="res-name" placeholder="Full Name" value="John Doe">
+                    <input type="email" id="res-email" placeholder="Email" value="john@example.com">
+                    <input type="tel" id="res-phone" placeholder="Phone" value="555-0123">
+                </div>
+                <div class="controls">
+                    <input type="text" id="res-request" placeholder="Special Request (optional)" style="flex: 1;">
+                    <button onclick="createReservation()">✅ Create Reservation</button>
+                </div>
+                <div id="create-status"></div>
+                <div id="create-response" class="response"></div>
+            </div>
+
+            <!-- Section 5: Get All Reservations -->
+            <div class="section">
+                <h2>5. Get All Reservations</h2>
+                <p>View all existing reservations</p>
+                <button onclick="getAllReservations()" id="btn-all-reservations">📅 Get All Reservations</button>
+                <div id="all-reservations-status"></div>
+                <div id="all-reservations-response" class="response"></div>
+            </div>
+
+            <!-- Section 6: Create Room -->
+            <div class="section">
+                <h2>6. Create New Room</h2>
+                <p>Add a new room to the system</p>
+                <div class="controls">
+                    <input type="text" id="create-room-desc" placeholder="Description" value="Deluxe Suite">
+                    <input type="number" id="create-room-capacity" placeholder="Capacity" value="2" min="1">
+                    <input type="number" id="create-room-price" placeholder="Price" step="0.01" value="150.00" min="0">
+                </div>
+                <div class="controls">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="create-room-bathroom" checked> Private Bathroom
+                    </label>
+                    <button onclick="createRoom()">➕ Create Room</button>
+                </div>
+                <div id="create-room-status"></div>
+                <div id="create-room-response" class="response"></div>
+            </div>
+
+            <!-- Section 7: Update Room -->
+            <div class="section">
+                <h2>7. Update Room</h2>
+                <p>Modify an existing room's details</p>
+                <div class="controls">
+                    <input type="number" id="update-room-id" placeholder="Room ID" value="1" min="1">
+                    <input type="text" id="update-room-desc" placeholder="Description" value="">
+                    <input type="number" id="update-room-capacity" placeholder="Capacity" value="" min="1">
+                </div>
+                <div class="controls">
+                    <input type="number" id="update-room-price" placeholder="Price" step="0.01" value="" min="0">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="update-room-bathroom"> Private Bathroom
+                    </label>
+                    <button onclick="updateRoom()">✏️ Update Room</button>
+                </div>
+                <div id="update-room-status"></div>
+                <div id="update-room-response" class="response"></div>
+            </div>
+
+            <!-- Section 8: Delete Room -->
+            <div class="section">
+                <h2>8. Delete Room</h2>
+                <p>Remove a room from the system</p>
+                <div class="controls">
+                    <input type="number" id="delete-room-id" placeholder="Room ID" value="" min="1">
+                    <button onclick="deleteRoom()" style="background: #dc3545;">🗑️ Delete Room</button>
+                </div>
+                <div id="delete-room-status"></div>
+                <div id="delete-room-response" class="response"></div>
+            </div>
+        </div>
+
+        <script>
+            const API_BASE = 'http://localhost:8080/HotelReservation-war/api';
+
+            // Get all rooms
+            async function getAllRooms() {
+                const responseDiv = document.getElementById('rooms-response');
+                const statusDiv = document.getElementById('rooms-status');
+                const btn = document.getElementById('btn-all-rooms');
+
+                responseDiv.innerHTML = '';
+                statusDiv.innerHTML = '<div class="status loading"><span class="loading-spinner"></span>Loading...</div>';
+                btn.disabled = true;
+
+                try {
+                    const response = await fetch(`${API_BASE}/rooms`);
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+
+                    if (data.length === 0) {
+                        responseDiv.innerHTML = '<div class="empty-state">No rooms found</div>';
+                        statusDiv.innerHTML = '<div class="status success">✓ Success - No rooms available</div>';
+                    } else {
+                        let html = `<div class="grid">`;
+                        data.forEach(room => {
+                            html += `
+                            <div class="room-card">
+                                <h3>Room #${room.id}</h3>
+                                <p class="room-info"><span class="icon">💬</span> ${room.description || 'No description'}</p>
+                                <p class="room-info"><span class="icon">👥</span> Capacity: ${room.numberOfPerson} person(s)</p>
+                                <p class="room-info">
+                                    <span class="icon">🚿</span> Private Bathroom: 
+                                    ${room.havePrivateBathroom ? '<span class="badge green">Yes</span>' : '<span class="badge blue">No</span>'}
+                                </p>
+                                <div class="price-tag">$${room.price.toFixed(2)}/night</div>
+                            </div>
+                        `;
+                        });
+                        html += '</div>';
+                        responseDiv.innerHTML = html;
+                        statusDiv.innerHTML = `<div class="status success">✓ Success - Found ${data.length} room(s)</div>`;
+                    }
+                } catch (error) {
+                    responseDiv.innerHTML = '<div class="empty-state">Error loading rooms</div>';
+                    statusDiv.innerHTML = `<div class="status error">✗ Error: ${error.message}</div>`;
+                } finally {
+                    btn.disabled = false;
+                }
+            }
+
+            // Get room by ID
+            async function getRoomById() {
+                const roomId = document.getElementById('room-id').value;
+                const responseDiv = document.getElementById('room-response');
+                const statusDiv = document.getElementById('room-status');
+
+                responseDiv.textContent = '';
+                statusDiv.innerHTML = '<div class="status loading"><span class="loading-spinner"></span>Loading...</div>';
+
+                try {
+                    const response = await fetch(`${API_BASE}/rooms/${roomId}`);
+
+                    if (!response.ok) {
+                        if (response.status === 404) {
+                            throw new Error('Room not found');
+                        }
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    const room = await response.json();
+                    responseDiv.textContent = JSON.stringify(room, null, 2);
+                    statusDiv.innerHTML = '<div class="status success">✓ Success - Room found</div>';
+                } catch (error) {
+                    responseDiv.textContent = '';
+                    statusDiv.innerHTML = `<div class="status error">✗ Error: ${error.message}</div>`;
+                }
+            }
+
+            // Search available rooms
+            async function searchAvailableRooms() {
+                const checkIn = document.getElementById('checkin-date').value;
+                const checkOut = document.getElementById('checkout-date').value;
+                const responseDiv = document.getElementById('search-response');
+                const statusDiv = document.getElementById('search-status');
+
+                responseDiv.innerHTML = '';
+                statusDiv.innerHTML = '<div class="status loading"><span class="loading-spinner"></span>Searching...</div>';
+
+                if (!checkIn || !checkOut) {
+                    statusDiv.innerHTML = '<div class="status error">✗ Error: Please select both dates</div>';
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`${API_BASE}/reservations/search?checkIn=${checkIn}&checkOut=${checkOut}`);
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+
+                    if (data.length === 0) {
+                        responseDiv.innerHTML = '<div class="empty-state">No available rooms found for these dates</div>';
+                        statusDiv.innerHTML = '<div class="status success">✓ Search complete - No rooms available</div>';
+                    } else {
+                        let html = `<p><strong>Available from ${checkIn} to ${checkOut}:</strong></p><div class="grid">`;
+                        data.forEach(room => {
+                            html += `
+                            <div class="room-card">
+                                <h3>Room #${room.id}</h3>
+                                <p class="room-info"><span class="icon">💬</span> ${room.description || 'No description'}</p>
+                                <p class="room-info"><span class="icon">👥</span> Capacity: ${room.numberOfPerson} person(s)</p>
+                                <div class="price-tag">$${room.price.toFixed(2)}/night</div>
+                            </div>
+                        `;
+                        });
+                        html += '</div>';
+                        responseDiv.innerHTML = html;
+                        statusDiv.innerHTML = `<div class="status success">✓ Success - Found ${data.length} available room(s)</div>`;
+                    }
+                } catch (error) {
+                    responseDiv.innerHTML = '<div class="empty-state">Error searching rooms</div>';
+                    statusDiv.innerHTML = `<div class="status error">✗ Error: ${error.message}</div>`;
+                }
+            }
+
+            // Create reservation
+            async function createReservation() {
+                const reservation = {
+                    idRoom: parseInt(document.getElementById('res-room-id').value),
+                    checkInDate: document.getElementById('res-checkin').value,
+                    checkOutDate: document.getElementById('res-checkout').value,
+                    fullName: document.getElementById('res-name').value,
+                    email: document.getElementById('res-email').value,
+                    phone: document.getElementById('res-phone').value,
+                    specialRequest: document.getElementById('res-request').value || ''
+                };
+
+                const responseDiv = document.getElementById('create-response');
+                const statusDiv = document.getElementById('create-status');
+
+                responseDiv.textContent = '';
+                statusDiv.innerHTML = '<div class="status loading"><span class="loading-spinner"></span>Creating reservation...</div>';
+
+                try {
+                    const response = await fetch(`${API_BASE}/reservations`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(reservation)
+                    });
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(`HTTP ${response.status}: ${errorText}`);
+                    }
+
+                    const data = await response.json();
+                    responseDiv.textContent = JSON.stringify(data, null, 2);
+                    statusDiv.innerHTML = '<div class="status success">✓ Success - Reservation created!</div>';
+                } catch (error) {
+                    responseDiv.textContent = '';
+                    statusDiv.innerHTML = `<div class="status error">✗ Error: ${error.message}</div>`;
+                }
+            }
+
+            // Get all reservations
+            async function getAllReservations() {
+                const responseDiv = document.getElementById('all-reservations-response');
+                const statusDiv = document.getElementById('all-reservations-status');
+                const btn = document.getElementById('btn-all-reservations');
+
+                responseDiv.textContent = '';
+                statusDiv.innerHTML = '<div class="status loading"><span class="loading-spinner"></span>Loading...</div>';
+                btn.disabled = true;
+
+                try {
+                    const response = await fetch(`${API_BASE}/reservations`);
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+                    responseDiv.textContent = JSON.stringify(data, null, 2);
+
+                    if (data.length === 0) {
+                        statusDiv.innerHTML = '<div class="status success">✓ Success - No reservations found</div>';
+                    } else {
+                        statusDiv.innerHTML = `<div class="status success">✓ Success - Found ${data.length} reservation(s)</div>`;
+                    }
+                } catch (error) {
+                    responseDiv.textContent = '';
+                    statusDiv.innerHTML = `<div class="status error">✗ Error: ${error.message}</div>`;
+                } finally {
+                    btn.disabled = false;
+                }
+            }
+
+            // Create room
+            async function createRoom() {
+                const room = {
+                    description: document.getElementById('create-room-desc').value,
+                    numberOfPerson: parseInt(document.getElementById('create-room-capacity').value),
+                    price: parseFloat(document.getElementById('create-room-price').value),
+                    havePrivateBathroom: document.getElementById('create-room-bathroom').checked
+                };
+
+                const responseDiv = document.getElementById('create-room-response');
+                const statusDiv = document.getElementById('create-room-status');
+
+                responseDiv.textContent = '';
+                statusDiv.innerHTML = '<div class="status loading"><span class="loading-spinner"></span>Creating room...</div>';
+
+                try {
+                    const response = await fetch(`${API_BASE}/rooms`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(room)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+                    responseDiv.textContent = JSON.stringify(data, null, 2);
+                    statusDiv.innerHTML = '<div class="status success">✓ Success - Room created!</div>';
+
+                    // Refresh the rooms list
+                    setTimeout(() => getAllRooms(), 500);
+                } catch (error) {
+                    responseDiv.textContent = '';
+                    statusDiv.innerHTML = `<div class="status error">✗ Error: ${error.message}</div>`;
+                }
+            }
+
+            // Update room
+            async function updateRoom() {
+                const roomId = document.getElementById('update-room-id').value;
+                const room = {};
+
+                // Include description if provided
+                const desc = document.getElementById('update-room-desc').value.trim();
+                if (desc) {
+                    room.description = desc;
+                }
+
+                // Include capacity if provided
+                const capacity = document.getElementById('update-room-capacity').value;
+                if (capacity) {
+                    room.numberOfPerson = parseInt(capacity);
+                }
+
+                // Include price if provided
+                const price = document.getElementById('update-room-price').value;
+                if (price) {
+                    room.price = parseFloat(price);
+                }
+
+                // Always include bathroom status if form has been initialized
+                const bathroomCheckbox = document.getElementById('update-room-bathroom');
+                if (bathroomCheckbox.hasAttribute('data-initialized')) {
+                    room.havePrivateBathroom = bathroomCheckbox.checked;
+                } else {
+                    // If not initialized, use the default value
+                    room.havePrivateBathroom = bathroomCheckbox.checked;
+                }
+
+                const responseDiv = document.getElementById('update-room-response');
+                const statusDiv = document.getElementById('update-room-status');
+
+                responseDiv.textContent = '';
+                statusDiv.innerHTML = '<div class="status loading"><span class="loading-spinner"></span>Updating room...</div>';
+
+                if (!roomId) {
+                    statusDiv.innerHTML = '<div class="status error">✗ Error: Please enter a room ID</div>';
+                    return;
+                }
+
+                if (Object.keys(room).length === 0) {
+                    statusDiv.innerHTML = '<div class="status error">✗ Error: Please enter at least one field to update</div>';
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`${API_BASE}/rooms/${roomId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(room)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    responseDiv.textContent = 'Room updated successfully';
+                    statusDiv.innerHTML = '<div class="status success">✓ Success - Room updated!</div>';
+
+                    // Refresh the rooms list
+                    setTimeout(() => getAllRooms(), 500);
+                } catch (error) {
+                    responseDiv.textContent = '';
+                    statusDiv.innerHTML = `<div class="status error">✗ Error: ${error.message}</div>`;
+                }
+            }
+
+            // Delete room
+            async function deleteRoom() {
+                const roomId = document.getElementById('delete-room-id').value;
+                const responseDiv = document.getElementById('delete-room-response');
+                const statusDiv = document.getElementById('delete-room-status');
+
+                responseDiv.textContent = '';
+                statusDiv.innerHTML = '<div class="status loading"><span class="loading-spinner"></span>Deleting room...</div>';
+
+                if (!roomId) {
+                    statusDiv.innerHTML = '<div class="status error">✗ Error: Please enter a room ID</div>';
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`${API_BASE}/rooms/${roomId}`, {
+                        method: 'DELETE'
+                    });
+
+                    if (!response.ok && response.status !== 204) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    responseDiv.textContent = 'Room deleted successfully';
+                    statusDiv.innerHTML = '<div class="status success">✓ Success - Room deleted!</div>';
+
+                    // Clear the input
+                    document.getElementById('delete-room-id').value = '';
+
+                    // Refresh the rooms list
+                    setTimeout(() => getAllRooms(), 500);
+                } catch (error) {
+                    responseDiv.textContent = '';
+                    statusDiv.innerHTML = `<div class="status error">✗ Error: ${error.message}</div>`;
+                }
+            }
+
+            // Helper function to load room details for update
+            async function loadRoomForUpdate(roomId) {
+                if (!roomId) return;
+
+                try {
+                    const response = await fetch(`${API_BASE}/rooms/${roomId}`);
+                    if (response.ok) {
+                        const room = await response.json();
+                        document.getElementById('update-room-desc').value = room.description || '';
+                        document.getElementById('update-room-capacity').value = room.numberOfPerson || '';
+                        document.getElementById('update-room-price').value = room.price || '';
+                        const bathroomCheckbox = document.getElementById('update-room-bathroom');
+                        bathroomCheckbox.checked = room.havePrivateBathroom || false;
+                        bathroomCheckbox.setAttribute('data-initialized', 'true');
+                    }
+                } catch (error) {
+                    console.error('Error loading room:', error);
+                }
+            }
+
+            // Add event listener for update room ID input
+            window.addEventListener('load', function () {
+                console.log('REST API Test Page loaded. Base URL:', API_BASE);
+                getAllRooms();
+
+                // Add change listener for update room ID
+                document.getElementById('update-room-id').addEventListener('change', function () {
+                    loadRoomForUpdate(this.value);
+                });
+
+                // Add enter key support for loading room details
+                document.getElementById('update-room-id').addEventListener('keyup', function (e) {
+                    if (e.key === 'Enter') {
+                        loadRoomForUpdate(this.value);
+                    }
+                });
+            });
+        </script>
+    </body>
+
+</html>

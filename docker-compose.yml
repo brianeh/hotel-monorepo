@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  hotel-monolith:
+    build:
+      context: ./hotel-monolith
+      dockerfile: Dockerfile
+    container_name: hotel-monolith
+    working_dir: /workspaces/hotel-monorepo/hotel-monolith
+    ports:
+      - "8080:8080"  # HTTP
+      - "4849:4848"  # Admin
+      - "3307:3306"  # MySQL (optional, for host access)
+    environment:
+      - JAVA_HOME=/usr/lib/jvm/java-8-openjdk-arm64
+      - GLASSFISH_HOME=/opt/glassfish4
+      - ANT_HOME=/opt/apache-ant-1.10.7
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=hotel_reservation_system
+    volumes:
+      - ${HOTEL_MONOLITH_PATH:-./hotel-monolith}:/workspaces/hotel-monorepo/hotel-monolith
+      - hotel-monolith-glassfish-data:/opt/glassfish4/glassfish/domains/domain1
+      - hotel-monolith-mysql-data:/var/lib/mysql
+    command: scripts/start-services.sh
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/HotelReservation-war/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  hotel-api-rest:
+    build:
+      context: ./hotel-api-rest
+      dockerfile: Dockerfile
+    container_name: hotel-api-rest
+    working_dir: /workspaces/hotel-monorepo/hotel-api-rest
+    ports:
+      - "8080:8080"  # HTTP
+      - "4850:4848"  # Admin
+      - "3308:3306"  # MySQL (optional, for host access)
+    environment:
+      - JAVA_HOME=/usr/lib/jvm/java-8-openjdk-arm64
+      - GLASSFISH_HOME=/opt/glassfish4
+      - ANT_HOME=/opt/apache-ant-1.10.7
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=hotel_reservation_system
+    volumes:
+      - ${HOTEL_API_REST_PATH:-./hotel-api-rest}:/workspaces/hotel-monorepo/hotel-api-rest
+      - hotel-api-rest-glassfish-data:/opt/glassfish4/glassfish/domains/domain1
+      - hotel-api-rest-mysql-data:/var/lib/mysql
+    command: scripts/start-services.sh
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/HotelReservation-war/api/rooms"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  hotel-ui-react:
+    build:
+      context: ./hotel-ui-react
+      dockerfile: Dockerfile
+    container_name: hotel-ui-react
+    working_dir: /workspaces/hotel-monorepo/hotel-ui-react
+    ports:
+      - "5173:5173"  # Vite dev server
+    environment:
+      - NODE_ENV=development
+      - VITE_API_URL=http://hotel-api-rest:8080/HotelReservation-war
+    volumes:
+      - ${HOTEL_UI_REACT_PATH:-./hotel-ui-react}:/workspaces/hotel-monorepo/hotel-ui-react
+      - hotel-ui-react-node-modules:/workspaces/hotel-monorepo/hotel-ui-react/node_modules
+    depends_on:
+      hotel-api-rest:
+        condition: service_healthy
+
+volumes:
+  hotel-monolith-glassfish-data:
+  hotel-monolith-mysql-data:
+  hotel-api-rest-glassfish-data:
+  hotel-api-rest-mysql-data:
+  hotel-ui-react-node-modules:
+

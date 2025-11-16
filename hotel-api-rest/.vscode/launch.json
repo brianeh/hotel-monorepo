@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Attach to GlassFish",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 9009,
+            "projectName": "HotelReservation",
+            "preLaunchTask": "Check Services Status"
+        },
+        {
+            "type": "java",
+            "name": "Debug Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "projectName": "HotelReservation"
+        }
+    ]
+}

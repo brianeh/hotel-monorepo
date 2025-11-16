@@ -1,0 +1,94 @@
+.hero {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.hero h1 {
+  font-size: 32px;
+  margin: 0 0 8px 0;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #e0f2fe;
+  margin: 0;
+}
+
+.hero span {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+
+.message {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.errorMessage {
+  background: rgba(220, 53, 69, 0.2);
+  border: 1px solid rgba(220, 53, 69, 0.4);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  color: #ffcccb;
+  margin-bottom: 24px;
+}
+
+.roomList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 20px;
+}
+
+.roomCard {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.roomHeader {
+  background: rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 16px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.roomBody {
+  padding: 20px;
+  display: grid;
+  gap: 12px;
+}
+
+.roomBody h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.description {
+  margin: 0;
+  color: #e0f2fe;
+  line-height: 1.6;
+}
+
+.price {
+  margin: 0;
+  font-weight: 600;
+  font-size: 18px;
+  color: #38b48e;
+}
