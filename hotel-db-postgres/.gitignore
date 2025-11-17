@@ -1,0 +1,34 @@
+# Environment files
+.env
+.env.local
+
+# Backup files
+backups/*.sql
+backups/*.dump
+backups/*.tar
+backups/*.gz
+
+# PostgreSQL data (managed by Docker volume)
+data/
+pgdata/
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
