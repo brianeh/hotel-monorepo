@@ -47,7 +47,7 @@
 			"onAutoForward": "notify"
 		}
 	},
-	"postCreateCommand": "bash /workspaces/hotel-api-restful/.devcontainer/setup.sh",
+	"postCreateCommand": "bash /workspaces/hotel-api-rest/.devcontainer/setup.sh",
 	"remoteEnv": {
 		"JAVA_HOME": "/usr/lib/jvm/java-8-openjdk-arm64",
 		"GLASSFISH_HOME": "/opt/glassfish4",

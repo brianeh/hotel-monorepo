@@ -69,7 +69,7 @@ This script will:
 
 ```bash
 # Build
-cd /workspaces/hotel-api-restful
+cd /workspaces/hotel-api-rest
 ant clean
 ant dist
 
@@ -133,7 +133,7 @@ asadmin start-domain domain1
 ## Project Structure
 
 ```
-hotel-api-restful/
+hotel-api-rest/
 ├── HotelReservation-ejb/          # EJB Module
 │   ├── src/
 │   │   ├── conf/

@@ -11,9 +11,9 @@ echo ""
 
 # Step 1: Copy build properties
 echo "Step 1: Copying build property files..."
-cp /tmp/build-properties/ejb.properties /workspaces/hotel-api-restful/HotelReservation-ejb/build.properties
-cp /tmp/build-properties/war.properties /workspaces/hotel-api-restful/HotelReservation-war/build.properties
-cp /tmp/build-properties/root.properties /workspaces/hotel-api-restful/build.properties
+cp /tmp/build-properties/ejb.properties /workspaces/hotel-api-rest/HotelReservation-ejb/build.properties
+cp /tmp/build-properties/war.properties /workspaces/hotel-api-rest/HotelReservation-war/build.properties
+cp /tmp/build-properties/root.properties /workspaces/hotel-api-rest/build.properties
 echo "✓ Build properties configured"
 echo ""
 
@@ -22,7 +22,7 @@ echo "Step 1b: Configuring auto-start for services..."
 if ! grep -q "ensure-services.sh" ~/.bashrc; then
     echo "" >> ~/.bashrc
     echo "# Auto-start services for Hotel Reservation System" >> ~/.bashrc
-    echo "source /workspaces/hotel-api-restful/.devcontainer/ensure-services.sh" >> ~/.bashrc
+    echo "source /workspaces/hotel-api-rest/.devcontainer/ensure-services.sh" >> ~/.bashrc
     echo "✓ Auto-start configured"
 else
     echo "✓ Auto-start already configured"

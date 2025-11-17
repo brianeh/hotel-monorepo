@@ -362,7 +362,7 @@ This service is designed to work with the `hotel-api-rest` service (Phase 2). Th
 - [Docker Compose Documentation](https://docs.docker.com/compose/)
 - [Vite Documentation](https://vitejs.dev/)
 - [React Documentation](https://react.dev/)
-- [hotel-api-rest Docker Setup](../hotel-api-rest/docs/DOCKER_SETUP.md)
+- [hotel-api-rest Docker Setup](https://github.com/brianeh/hotel-modernization/blob/main/hotel-api-rest/docs/DOCKER_SETUP.md)
 
 ## Support
 
