@@ -399,7 +399,7 @@ The `docker-compose.yml` file currently uses hardcoded environment values for si
 
 ## Contributing
 
-This database service is part of the Hotel Reservation System modernization portfolio. See the main portfolio [README](https://github.com/brianeh/hotel-monorepo/blob/main/README.md) for the overall architecture and migration strategy.
+This database service is part of the Hotel Reservation System modernization portfolio. See the main portfolio [README](https://github.com/brianeh/hotel-modernization/blob/main/README.md) for the overall architecture and migration strategy.
 
 ## Related Documentation
 

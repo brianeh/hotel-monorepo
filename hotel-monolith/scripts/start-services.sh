@@ -10,7 +10,7 @@ echo "════════════════════════�
 echo ""
 
 # Ensure we're in the correct directory
-cd /workspaces/hotel-monorepo/hotel-monolith
+cd /workspaces/hotel-modernization/hotel-monolith
 
 # Step 1: Copy build properties to project directories
 echo "Step 1: Copying build property files..."

@@ -117,17 +117,17 @@ Create a `.env` file in the monorepo root:
 
 ```env
 # .env file in monorepo root
-HOTEL_UI_REACT_PATH=/Users/username/path/to/hotel-monorepo/hotel-ui-react
+HOTEL_UI_REACT_PATH=/Users/username/path/to/hotel-modernization/hotel-ui-react
 ```
 
-Replace `/Users/username/path/to/hotel-monorepo` with your actual Mac path.
+Replace `/Users/username/path/to/hotel-modernization` with your actual Mac path.
 
 **Option 2: Using environment variable**
 
 Export the variable in your devcontainer shell:
 
 ```bash
-export HOTEL_UI_REACT_PATH=/Users/username/path/to/hotel-monorepo/hotel-ui-react
+export HOTEL_UI_REACT_PATH=/Users/username/path/to/hotel-modernization/hotel-ui-react
 docker compose up -d hotel-ui-react
 ```
 
@@ -142,10 +142,10 @@ docker compose up -d hotel-ui-react
 
 **Example:**
 
-If your monorepo is at `/Users/john/projects/hotel-monorepo` on your Mac, then:
+If your monorepo is at `/Users/john/projects/hotel-modernization` on your Mac, then:
 
 ```env
-HOTEL_UI_REACT_PATH=/Users/john/projects/hotel-monorepo/hotel-ui-react
+HOTEL_UI_REACT_PATH=/Users/john/projects/hotel-modernization/hotel-ui-react
 ```
 
 **Note**: The `.env` file is automatically loaded by Docker Compose when placed in the same directory as `docker-compose.yml`. See `.env.example` for a template.
@@ -264,7 +264,7 @@ If you still encounter CORS errors:
 
 **Check volume mount**:
 ```bash
-docker compose exec hotel-ui-react ls -la /workspaces/hotel-monorepo/hotel-ui-react
+docker compose exec hotel-ui-react ls -la /workspaces/hotel-modernization/hotel-ui-react
 ```
 
 **Verify file changes are detected**:

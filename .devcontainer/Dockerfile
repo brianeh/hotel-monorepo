@@ -84,4 +84,4 @@ RUN mkdir -p "${PIPX_HOME}" "${PIPX_BIN_DIR}" \
     && chown -R "${USERNAME}":"${USERNAME}" "${PIPX_HOME}"
 
 USER ${USERNAME}
-WORKDIR /workspaces/hotel-monorepo
+WORKDIR /workspaces/hotel-modernization

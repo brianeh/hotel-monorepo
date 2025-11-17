@@ -145,17 +145,17 @@ Create a `.env` file in the monorepo root:
 
 ```env
 # .env file in monorepo root
-MONOREPO_HOST_PATH=/Users/username/path/to/hotel-monorepo/hotel-api-rest
+MONOREPO_HOST_PATH=/Users/username/path/to/hotel-modernization/hotel-api-rest
 ```
 
-Replace `/Users/username/path/to/hotel-monorepo` with your actual Mac path.
+Replace `/Users/username/path/to/hotel-modernization` with your actual Mac path.
 
 **Option 2: Using environment variable**
 
 Export the variable in your devcontainer shell:
 
 ```bash
-export MONOREPO_HOST_PATH=/Users/username/path/to/hotel-monorepo/hotel-api-rest
+export MONOREPO_HOST_PATH=/Users/username/path/to/hotel-modernization/hotel-api-rest
 docker compose up -d hotel-api-rest
 ```
 
@@ -170,10 +170,10 @@ docker compose up -d hotel-api-rest
 
 **Example:**
 
-If your monorepo is at `/Users/john/projects/hotel-monorepo` on your Mac, then:
+If your monorepo is at `/Users/john/projects/hotel-modernization` on your Mac, then:
 
 ```env
-MONOREPO_HOST_PATH=/Users/john/projects/hotel-monorepo/hotel-api-rest
+MONOREPO_HOST_PATH=/Users/john/projects/hotel-modernization/hotel-api-rest
 ```
 
 **Note**: The `.env` file is automatically loaded by Docker Compose when placed in the same directory as `docker-compose.yml`. See `.env.example` for a template.
@@ -340,12 +340,12 @@ This occurs when running `docker compose` from inside a devcontainer. The issue 
 
 2. **Create `.env` file** in monorepo root with the absolute Mac path:
    ```env
-   MONOREPO_HOST_PATH=/Users/username/path/to/hotel-monorepo/hotel-api-rest
+   MONOREPO_HOST_PATH=/Users/username/path/to/hotel-modernization/hotel-api-rest
    ```
 
 3. **Or export the variable** before running Docker Compose:
    ```bash
-   export MONOREPO_HOST_PATH=/Users/username/path/to/hotel-monorepo/hotel-api-rest
+   export MONOREPO_HOST_PATH=/Users/username/path/to/hotel-modernization/hotel-api-rest
    docker compose up -d hotel-api-rest
    ```
 

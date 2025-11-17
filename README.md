@@ -11,7 +11,7 @@ This repository is organized into phases that can be explored independently or e
 ## Modernization Plan
 
 ```
-hotel-monorepo/
+hotel-modernization/
 ├── hotel-monolith/             ✅ Phase 1: Legacy Java EE Baseline (Implemented)
 ├── hotel-api-rest/             ✅ Phase 2: RESTful API Layer (Implemented)
 ├── hotel-ui-react/             ✅ Phase 3: React SPA Frontend (Implemented)
@@ -27,7 +27,7 @@ hotel-monorepo/
 
 - **hotel-monolith** - Original Java EE monolith with JSP/Servlet frontend, EJB session beans, and MySQL database
   
-  > **Note:** The original legacy application `hotel-monolith` was forked from another repository and is maintained at [https://github.com/brianeh/hotel-monolith](https://github.com/brianeh/hotel-monolith). That repository contains the original legacy monolith code that is being modernized in this `hotel-monorepo` demonstration project.
+  > **Note:** The original legacy application `hotel-monolith` was forked from another repository and is maintained at [https://github.com/brianeh/hotel-monolith](https://github.com/brianeh/hotel-monolith). That repository contains the original legacy monolith code that is being modernized in this `hotel-modernization` demonstration project.
 
 - **hotel-api-rest** - Enhanced monolith with JAX-RS REST API layer (Jersey) for API-first development
 - **hotel-ui-react** - Modern React SPA frontend consuming REST API via Vite proxy, built with TypeScript and CSS Modules

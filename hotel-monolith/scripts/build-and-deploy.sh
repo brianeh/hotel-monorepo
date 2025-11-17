@@ -18,7 +18,7 @@ fi
 
 # Build the application
 echo "Step 1: Building application..."
-cd /workspaces/hotel-monorepo/hotel-monolith
+cd /workspaces/hotel-modernization/hotel-monolith
 
 # Set Ant properties for NetBeans-generated build files
 ANT_PROPS="-Dlibs.CopyLibs.classpath=/opt/lib/org-netbeans-modules-java-j2seproject-copylibstask.jar"

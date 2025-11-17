@@ -1,7 +1,7 @@
 FROM node:20-alpine
 
 # Set working directory
-WORKDIR /workspaces/hotel-monorepo/hotel-ui-react
+WORKDIR /workspaces/hotel-modernization/hotel-ui-react
 
 # Copy package files
 COPY package*.json ./

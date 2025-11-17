@@ -101,7 +101,7 @@ ENV ANT_HOME=/opt/apache-ant-1.10.7
 ENV PATH=$JAVA_HOME/bin:$GLASSFISH_HOME/bin:$ANT_HOME/bin:$PATH
 
 # Set working directory
-WORKDIR /workspaces/hotel-monorepo/hotel-api-rest
+WORKDIR /workspaces/hotel-modernization/hotel-api-rest
 
 # Keep as root user for MySQL service management
 # Note: vscode user is available for compatibility, but container runs as root

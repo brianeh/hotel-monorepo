@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   hotel-monolith:
     profiles:
@@ -9,7 +7,7 @@ services:
       context: ./hotel-monolith
       dockerfile: Dockerfile
     container_name: hotel-monolith
-    working_dir: /workspaces/hotel-monorepo/hotel-monolith
+    working_dir: /workspaces/hotel-modernization/hotel-monolith
     ports:
       - "8080:8080"  # HTTP
       - "4849:4848"  # Admin
@@ -21,7 +19,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=hotel_reservation_system
     volumes:
-      - ${HOTEL_MONOLITH_PATH:-./hotel-monolith}:/workspaces/hotel-monorepo/hotel-monolith
+      - ${HOTEL_MONOLITH_PATH:-./hotel-monolith}:/workspaces/hotel-modernization/hotel-monolith
       - hotel-monolith-glassfish-data:/opt/glassfish4/glassfish/domains/domain1
       - hotel-monolith-mysql-data:/var/lib/mysql
     command: scripts/start-services.sh
@@ -37,12 +35,13 @@ services:
   hotel-api-rest:
     profiles:
       - api
+      - ui
       - all
     build:
       context: ./hotel-api-rest
       dockerfile: Dockerfile
     container_name: hotel-api-rest
-    working_dir: /workspaces/hotel-monorepo/hotel-api-rest
+    working_dir: /workspaces/hotel-modernization/hotel-api-rest
     ports:
       - "8080:8080"  # HTTP
       - "4850:4848"  # Admin
@@ -54,7 +53,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=hotel_reservation_system
     volumes:
-      - ${HOTEL_API_REST_PATH:-./hotel-api-rest}:/workspaces/hotel-monorepo/hotel-api-rest
+      - ${HOTEL_API_REST_PATH:-./hotel-api-rest}:/workspaces/hotel-modernization/hotel-api-rest
       - hotel-api-rest-glassfish-data:/opt/glassfish4/glassfish/domains/domain1
       - hotel-api-rest-mysql-data:/var/lib/mysql
     command: scripts/start-services.sh
@@ -75,15 +74,15 @@ services:
       context: ./hotel-ui-react
       dockerfile: Dockerfile
     container_name: hotel-ui-react
-    working_dir: /workspaces/hotel-monorepo/hotel-ui-react
+    working_dir: /workspaces/hotel-modernization/hotel-ui-react
     ports:
       - "5173:5173"  # Vite dev server
     environment:
       - NODE_ENV=development
       - VITE_API_URL=http://hotel-api-rest:8080/HotelReservation-war
     volumes:
-      - ${HOTEL_UI_REACT_PATH:-./hotel-ui-react}:/workspaces/hotel-monorepo/hotel-ui-react
-      - hotel-ui-react-node-modules:/workspaces/hotel-monorepo/hotel-ui-react/node_modules
+      - ${HOTEL_UI_REACT_PATH:-./hotel-ui-react}:/workspaces/hotel-modernization/hotel-ui-react
+      - hotel-ui-react-node-modules:/workspaces/hotel-modernization/hotel-ui-react/node_modules
     depends_on:
       hotel-api-rest:
         condition: service_healthy

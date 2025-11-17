@@ -42,5 +42,5 @@
     }
   },
   "postCreateCommand": "pipx ensurepath && chmod +x .devcontainer/connect-to-network.sh",
-  "postStartCommand": "sudo /usr/local/bin/fix-docker-permissions.sh ${USER:-vscode} /var/run/docker.sock && cd /workspaces/hotel-monorepo && .devcontainer/connect-to-network.sh || true"
+  "postStartCommand": "sudo /usr/local/bin/fix-docker-permissions.sh ${USER:-vscode} /var/run/docker.sock && cd /workspaces/hotel-modernization && .devcontainer/connect-to-network.sh || true"
 }

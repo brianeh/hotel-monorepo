@@ -710,7 +710,7 @@ docker compose logs -f hotel-monolith
 2. Exec into container and build:
    ```bash
    docker compose exec hotel-monolith bash
-   cd /workspaces/hotel-monorepo/hotel-monolith
+   cd /workspaces/hotel-modernization/hotel-monolith
    ant clean dist
    ./deploy.sh
    ```
@@ -742,7 +742,7 @@ docker compose logs -f hotel-api-rest
 2. Exec into container and build:
    ```bash
    docker compose exec hotel-api-rest bash
-   cd /workspaces/hotel-monorepo/hotel-api-rest
+   cd /workspaces/hotel-modernization/hotel-api-rest
    ant clean dist
    ./deploy.sh
    ```
