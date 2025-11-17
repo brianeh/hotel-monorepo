@@ -3,7 +3,7 @@ A web application to book a room in a hotel, a customer must check the applicati
 
 [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-> Note: This repository is part of the Hotel Modernization umbrella project: [hotel-monorepo](https://github.com/brianeh/hotel-monorepo).
+> Note: This repository is part of the Hotel Modernization umbrella project: [hotel-modernization](https://github.com/brianeh/hotel-modernization).
 
 ---
 
